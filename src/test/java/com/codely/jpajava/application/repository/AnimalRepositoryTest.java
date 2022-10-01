@@ -15,7 +15,7 @@ class AnimalRepositoryTest {
     private AnimalRepository animalRepository;
 
     @Test
-    public void saveOneElementTest(){
+    public void saveOneElementTest() {
         var oneAnimal = new Animal();
         oneAnimal.setName("cow");
 
@@ -29,18 +29,20 @@ class AnimalRepositoryTest {
     }
 
     @Test
-    public void saveAutoincrementTest(){
+    public void saveAutoincrementTest() {
         var animal = new Animal();
         animal.setName("cow");
 
         assertThat(animal.getId()).isNull();
         assertThat(animal.getName()).isEqualTo("cow");
 
-        animalRepository.save(animal);
+        var savedAnimal = animalRepository.save(animal);
 
         assertThat(animal.getId()).isNotNull();
         assertThat(animal.getId()).isEqualTo(1);
         assertThat(animal.getName()).isEqualTo("cow");
+
+        assertThat(savedAnimal).isEqualTo(animal);
 
         var animalsInDb = animalRepository.findAll();
 
@@ -50,7 +52,7 @@ class AnimalRepositoryTest {
     }
 
     @Test
-    public void saveSeveralElementsTest(){
+    public void saveSeveralElementsTest() {
         var first = new Animal();
         first.setName("cow");
         var second = new Animal();
