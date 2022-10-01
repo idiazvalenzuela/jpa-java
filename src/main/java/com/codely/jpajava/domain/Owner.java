@@ -16,8 +16,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Builder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
-@Table(name = "owner")
 @NoArgsConstructor
+@Table(name = "owner")
 public class Owner {
 
     @Id

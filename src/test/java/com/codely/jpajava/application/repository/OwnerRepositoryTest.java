@@ -1,11 +1,14 @@
 package com.codely.jpajava.application.repository;
 
 import com.codely.jpajava.domain.Owner;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.TransactionSystemException;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -15,6 +18,11 @@ class OwnerRepositoryTest {
 
     @Autowired
     private OwnerRepository ownerRepository;
+
+    @BeforeEach
+    public void setUp() {
+        ownerRepository.deleteAll();
+    }
 
     @Test
     public void saveOneElementTest() {
@@ -65,9 +73,35 @@ class OwnerRepositoryTest {
     public void notNullConstraint() {
 
         var owner = Owner.builder().id(123).email("mail@mail.com").build();
-        
+
         assertThatExceptionOfType(TransactionSystemException.class)
                 .isThrownBy(() -> ownerRepository.save(owner));
+    }
+
+    @Test
+    public void findByMultipleCriteria() {
+        var owner = Owner.builder().id(123).email("mail@email.com").name("Jane Marie").preferredName("Jany").build();
+        var anotherOwner = Owner.builder().id(456).email("anotherEmail@mail.com").name("John Smith").build();
+
+        ownerRepository.saveAll(List.of(owner, anotherOwner));
+
+        var found = ownerRepository.findOwnerByNameAndPreferredName("Jane Marie", "Jany");
+
+        assertThat(found).isEqualTo(owner);
+
+    }
+
+    @Test
+    public void findByMultipleCriteriaWithNull() {
+        var owner = Owner.builder().id(123).email("mail@email.com").name("Jane Marie").preferredName("Jany").build();
+        var anotherOwner = Owner.builder().id(456).email("anotherEmail@mail.com").name("John Smith").build();
+
+        ownerRepository.saveAll(List.of(owner, anotherOwner));
+
+        var found = ownerRepository.findOwnerByNameAndPreferredName("John Smith", null);
+
+        assertThat(found).isEqualTo(anotherOwner);
+
     }
 
 
