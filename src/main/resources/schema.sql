@@ -67,3 +67,20 @@ ALTER TABLE tree_forest
 
 ALTER TABLE tree_forest
     ADD CONSTRAINT fk_trefor_on_tree FOREIGN KEY (tree_name) REFERENCES tree (name);
+
+CREATE TABLE managed_farm
+(
+    id   INT PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+CREATE TABLE foreman
+(
+    id              INT NOT NULL,
+    name            VARCHAR(255),
+    managed_farm_id INT,
+    CONSTRAINT pk_foreman PRIMARY KEY (id)
+);
+
+ALTER TABLE foreman
+    ADD CONSTRAINT FK_FOREMAN_ON_MANAGED_FARM FOREIGN KEY (managed_farm_id) REFERENCES managed_farm (id);
