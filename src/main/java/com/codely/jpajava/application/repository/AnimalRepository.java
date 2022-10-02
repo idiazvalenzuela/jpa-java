@@ -13,5 +13,10 @@ public interface AnimalRepository extends CrudRepository<Animal, Integer> {
 
     Animal findFirstByName(String name);
 
+    Animal findTopByName(String name);
+
     List<Animal> findAnimalsByName(String name);
+
+    List<Animal> findAnimalsByNameIgnoreCase(String name);
+
 }

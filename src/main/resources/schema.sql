@@ -14,3 +14,13 @@ CREATE TABLE owner
     preferred_name VARCHAR(255),
     CONSTRAINT uc_owner_email UNIQUE (email)
 );
+
+
+CREATE TABLE vegetable
+(
+    vegetable_type VARCHAR(255) NOT NULL,
+    average_weight DOUBLE,
+    name           VARCHAR(255) NOT NULL,
+    family         VARCHAR(255) NOT NULL,
+    CONSTRAINT pk_vegetable PRIMARY KEY (name, family)
+);
