@@ -12,6 +12,7 @@ CREATE TABLE owner
     email          VARCHAR(255),
     name           VARCHAR(255) NOT NULL,
     preferred_name VARCHAR(255),
+    joined_at      TIMESTAMP,
     CONSTRAINT uc_owner_email UNIQUE (email)
 );
 
