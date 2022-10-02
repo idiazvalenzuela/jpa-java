@@ -25,3 +25,20 @@ CREATE TABLE vegetable
     family         VARCHAR(255) NOT NULL,
     CONSTRAINT pk_vegetable PRIMARY KEY (name, family)
 );
+
+CREATE TABLE location
+(
+    id        INT PRIMARY KEY,
+    latitude  DOUBLE,
+    longitude DOUBLE
+);
+
+CREATE TABLE farm
+(
+    id          INT PRIMARY KEY,
+    name        VARCHAR(255) NOT NULL,
+    location_id INT
+);
+
+ALTER TABLE farm
+    ADD CONSTRAINT FK_FARM_ON_LOCATION FOREIGN KEY (location_id) REFERENCES location (id);
