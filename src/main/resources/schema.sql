@@ -42,3 +42,28 @@ CREATE TABLE farm
 
 ALTER TABLE farm
     ADD CONSTRAINT FK_FARM_ON_LOCATION FOREIGN KEY (location_id) REFERENCES location (id);
+
+CREATE TABLE tree
+(
+    name VARCHAR(255) PRIMARY KEY
+);
+
+CREATE TABLE forest
+(
+    id   INT NOT NULL,
+    name VARCHAR(255),
+    CONSTRAINT pk_forest PRIMARY KEY (id)
+);
+
+CREATE TABLE tree_forest
+(
+    forest_id INT          NOT NULL,
+    tree_name VARCHAR(255) NOT NULL,
+    CONSTRAINT pk_tree_forest PRIMARY KEY (forest_id, tree_name)
+);
+
+ALTER TABLE tree_forest
+    ADD CONSTRAINT fk_trefor_on_forest FOREIGN KEY (forest_id) REFERENCES forest (id);
+
+ALTER TABLE tree_forest
+    ADD CONSTRAINT fk_trefor_on_tree FOREIGN KEY (tree_name) REFERENCES tree (name);
