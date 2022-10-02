@@ -67,6 +67,34 @@ class VegetableRepositoryTest {
 
         assertThat(tubers).hasSize(2);
         assertThat(tubers).containsExactly(carrot, potato);
+    }
+
+    @Test
+    public void findByNameLikeTest() {
+        var carrot = Vegetable.builder()
+                .name("Carrot")
+                .family("Apiaceae")
+                .type(VegetableType.TUBER.name())
+                .averageWeight(35.6)
+                .build();
+        var potato = Vegetable.builder()
+                .name("Potato")
+                .family("Solanaceace")
+                .type(VegetableType.TUBER.name())
+                .averageWeight(100.0)
+                .build();
+        var lettuce = Vegetable.builder()
+                .name("Lettuce")
+                .family("Compositae")
+                .type(VegetableType.WITH_LEAVES.name())
+                .averageWeight(35.6)
+                .build();
+
+        vegetableRepository.saveAll(List.of(carrot, potato, lettuce));
+
+        var likelett = vegetableRepository.findAllByNameLike("Lett%");
+
+        assertThat(likelett).hasSize(1);
 
     }
 }

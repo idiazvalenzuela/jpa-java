@@ -10,4 +10,6 @@ import java.util.List;
 public interface VegetableRepository extends JpaRepository<Vegetable, VegetableId> {
 
     List<Vegetable> findVegetablesByTypeOrderByAverageWeight(String type, Sort sort);
+
+    List<Vegetable> findAllByNameLike(String like);
 }
