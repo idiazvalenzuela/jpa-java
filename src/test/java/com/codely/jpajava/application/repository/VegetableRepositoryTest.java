@@ -92,9 +92,7 @@ class VegetableRepositoryTest {
 
         vegetableRepository.saveAll(List.of(carrot, potato, lettuce));
 
-        var likelett = vegetableRepository.findAllByNameLike("Lett%");
-
-        assertThat(likelett).hasSize(1);
+        assertThat(vegetableRepository.findAllByNameLike("Lett%")).hasSize(1);
 
     }
 }
