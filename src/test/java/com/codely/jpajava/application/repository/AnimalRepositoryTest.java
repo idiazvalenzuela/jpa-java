@@ -38,28 +38,6 @@ class AnimalRepositoryTest {
     }
 
     @Test
-    public void saveAutoincrementTest() {
-        var animal = new Animal();
-        animal.setName("cow");
-
-        assertThat(animal.getId()).isNull();
-        assertThat(animal.getName()).isEqualTo("cow");
-
-        var savedAnimal = animalRepository.save(animal);
-
-        assertThat(animal.getId()).isNotNull();
-        assertThat(animal.getName()).isEqualTo("cow");
-
-        assertThat(savedAnimal).isEqualTo(animal);
-
-        var animalsInDb = animalRepository.findAll();
-
-        assertThat(animalsInDb).hasSize(1);
-        assertThat(animalsInDb).contains(animal);
-
-    }
-
-    @Test
     public void saveSeveralElementsTest() {
         var first = new Animal();
         first.setName("cow");

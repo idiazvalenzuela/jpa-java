@@ -28,7 +28,7 @@ class VegetableRepositoryTest {
         var vegetable = Vegetable.builder()
                 .name("Carrot")
                 .family("Apiaceae")
-                .type(VegetableType.TUBER.name())
+                .type(VegetableType.TUBER)
                 .averageWeight(35.6)
                 .build();
 
@@ -45,25 +45,25 @@ class VegetableRepositoryTest {
         var carrot = Vegetable.builder()
                 .name("Carrot")
                 .family("Apiaceae")
-                .type(VegetableType.TUBER.name())
+                .type(VegetableType.TUBER)
                 .averageWeight(35.6)
                 .build();
         var potato = Vegetable.builder()
                 .name("Potato")
                 .family("Solanaceace")
-                .type(VegetableType.TUBER.name())
+                .type(VegetableType.TUBER)
                 .averageWeight(100.0)
                 .build();
         var lettuce = Vegetable.builder()
                 .name("Lettuce")
                 .family("Compositae")
-                .type(VegetableType.WITH_LEAVES.name())
+                .type(VegetableType.WITH_LEAVES)
                 .averageWeight(35.6)
                 .build();
 
         vegetableRepository.saveAll(List.of(carrot, potato, lettuce));
 
-        var tubers = vegetableRepository.findVegetablesByTypeOrderByAverageWeight(VegetableType.TUBER.name(), Sort.unsorted().descending());
+        var tubers = vegetableRepository.findVegetablesByTypeOrderByAverageWeight(VegetableType.TUBER, Sort.unsorted().descending());
 
         assertThat(tubers).hasSize(2);
         assertThat(tubers).containsExactly(carrot, potato);
@@ -74,19 +74,19 @@ class VegetableRepositoryTest {
         var carrot = Vegetable.builder()
                 .name("Carrot")
                 .family("Apiaceae")
-                .type(VegetableType.TUBER.name())
+                .type(VegetableType.TUBER)
                 .averageWeight(35.6)
                 .build();
         var potato = Vegetable.builder()
                 .name("Potato")
                 .family("Solanaceace")
-                .type(VegetableType.TUBER.name())
+                .type(VegetableType.TUBER)
                 .averageWeight(100.0)
                 .build();
         var lettuce = Vegetable.builder()
                 .name("Lettuce")
                 .family("Compositae")
-                .type(VegetableType.WITH_LEAVES.name())
+                .type(VegetableType.WITH_LEAVES)
                 .averageWeight(35.6)
                 .build();
 

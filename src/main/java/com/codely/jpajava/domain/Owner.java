@@ -3,8 +3,11 @@ package com.codely.jpajava.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +18,9 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Data
+@Setter
+@Getter
+@EqualsAndHashCode
 @Entity
 @Builder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
@@ -26,6 +31,7 @@ public class Owner {
     @Id
     private Integer id;
 
+    @NaturalId
     @Column(unique = true)
     private String email;
 
